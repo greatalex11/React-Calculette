@@ -1,17 +1,28 @@
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import {useRef} from "react";
 import './App.css'
 
 function App() {
 
+const classSelector=useRef(null)
 
+    useEffect(() => {
+
+        if(classSelector.current){
+           const opCalc=classSelector.current.querySelectorAll('.global.operation');
+          for (let op of opCalc){
+              console.log(op.value);
+          }
+        }
+    }, []);
 
   return (
     <>
        <div>
           <h1>Ma Super Calculette Objet</h1>
-          <div className="container">
+          <div className="container" ref={classSelector}>
             <div className="header">Calculator</div>
               <input className="result" id="display" readOnly type="text"/>
 
@@ -22,12 +33,15 @@ function App() {
                                   <input className="global operation" name="" type="button" value="%"/>
                   </div>
                   <div className="second-row">
+
                       <input className="global chiffre" name="" type="button" value="7"/>
                           <input className="global chiffre" name="" type="button" value="8"/>
                               <input className="global chiffre" name="" type="button" value="9"/>
                                   <input className="global operation" name="" type="button" value=""/>
                   </div>
+
                   <div className="third-row">
+
                       <input className="global chiffre" name="" type="button" value="4"/>
                           <input className="global chiffre" name="" type="button" value="5"/>
                               <input className="global chiffre" name="" type="button" value="6"/>
